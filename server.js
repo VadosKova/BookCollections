@@ -42,3 +42,15 @@ app.get('/books/:id', async (req, res) => {
     res.status(400).json({ error: 'Incorrect ID' });
   }
 });
+
+app.put('/books/:id', async (req, res) => {
+  try {
+    const { title, author, available } = req.body;
+    const book = await Book.findByIdAndUpdate(req.params.id, { title, author, available }, { new: true, runValidators: true });
+
+    if (!book) return res.status(404).json({ error: 'Book not found' });
+    res.status(200).json(book);
+  } catch (err) {
+    res.status(400).json({ error: 'Incorrect ID' });
+  }
+});
