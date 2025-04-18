@@ -64,3 +64,9 @@ app.delete('/books/:id', async (req, res) => {
     res.status(400).json({ error: 'Incorrect ID' });
   }
 });
+
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
