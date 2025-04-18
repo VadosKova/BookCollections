@@ -54,3 +54,13 @@ app.put('/books/:id', async (req, res) => {
     res.status(400).json({ error: 'Incorrect ID' });
   }
 });
+
+app.delete('/books/:id', async (req, res) => {
+  try {
+    const book = await Book.findByIdAndDelete(req.params.id);
+    if (!book) return res.status(404).json({ error: 'Book not found' });
+    res.status(204).send();
+  } catch (err) {
+    res.status(400).json({ error: 'Incorrect ID' });
+  }
+});
